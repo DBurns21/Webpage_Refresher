@@ -60,9 +60,7 @@ function onSubmit(e) {
             options: {
                 plugins: {
                     datalabels: {
-                        // Customize datalabels appearance and content
-                        //anchor: 'end', // Position of the label (e.g., 'start', 'center', 'end')
-                        //align: 'top', // Alignment relative to the anchor
+                        //this is what is displayed directly on each section of the chart
                         formatter: (value, context) => {
                             return `${labels[context.dataIndex]}: $${value}`; // Display the raw data value
                         },
@@ -70,6 +68,10 @@ function onSubmit(e) {
                         font: {
                             weight: 'bold'
                         }
+                    },
+                    legend: {
+                        //removes the legend from being displayed since it is labeled on the chart
+                        display: false
                     }
                 }
             }
