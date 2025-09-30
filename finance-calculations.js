@@ -6,6 +6,7 @@ const msg = document.querySelector('.msg');
 const incomeInput = document.querySelector('#income');
 const payFrequency = document.querySelector('#payFreqency');
 const userList = document.querySelector('#users');
+let incomeChart = null; 
 
 
 myForm.addEventListener('submit', onSubmit);
@@ -41,7 +42,11 @@ function onSubmit(e) {
         addToList(`$${savings} should go to savings or debts`);
         addToList(`That leaves you with $${wantsMoney} for anything you may want.`);
 
-        new Chart(ctx, {
+        if (incomeChart !== null) {
+            incomeChart.destroy();
+        } 
+
+        incomeChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
             labels: ['Needs', 'Wants', 'Savings/Debts'],
@@ -52,6 +57,7 @@ function onSubmit(e) {
             }]
             }
         });
+        
     }
 }
 
@@ -63,7 +69,7 @@ function splitIncome(income) {
     return [needsMoney, savings, wantsMoney];
 }
 
-function determineIncome(income, frequency) {
+function determineIncome() {
     if (payFrequency.value === 'monthly') {
             return incomeInput.value;
         } else if (payFrequency.value === 'biweekly') {
