@@ -40,12 +40,25 @@ function onSubmit(e) {
             income = incomeInput.value * 160;
         }
 
-
-
-        //just a temporary list so that I can see if data is being taken in correctly
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${income} : monthly`));
-
-        userList.appendChild(li);
+        let [needsMoney, savings, wantsMoney] = splitIncome(income);
+        
+        addToList(`Your monthly income is ${income} \n`);
+        addToList(`You should be spending around $${needsMoney} on necessities`);
+        addToList(`$${savings} should go to savings or debts`);
+        addToList(`That leaves you with $${wantsMoney} for anything you may want.`);
     }
+}
+
+function splitIncome(income) {
+    let needsMoney = Math.ceil(income * 0.5);
+    let savings = Math.ceil(income * 0.3);
+    let wantsMoney = income - needsMoney - savings;
+
+    return [needsMoney, savings, wantsMoney];
+}
+
+function addToList(string) {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(string));
+   userList.appendChild(li);
 }
