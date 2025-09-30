@@ -1,4 +1,4 @@
-
+Chart.register(ChartDataLabels);
         
 const ctx = document.getElementById('pie-chart');
 const myForm = document.querySelector('#my-form');
@@ -45,6 +45,7 @@ function onSubmit(e) {
         if (incomeChart !== null) {
             incomeChart.destroy();
         } 
+        let labels = ['Needs', 'Wants', 'Savings/Debts'];
 
         incomeChart = new Chart(ctx, {
             type: 'doughnut',
@@ -55,9 +56,24 @@ function onSubmit(e) {
                 data: [needsMoney, wantsMoney, savings],
                 borderWidth: 1
             }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        // Customize datalabels appearance and content
+                        //anchor: 'end', // Position of the label (e.g., 'start', 'center', 'end')
+                        //align: 'top', // Alignment relative to the anchor
+                        formatter: (value, context) => {
+                            return `${labels[context.dataIndex]}: $${value}`; // Display the raw data value
+                        },
+                        color: 'black', // Color of the text
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
             }
         });
-        
     }
 }
 
