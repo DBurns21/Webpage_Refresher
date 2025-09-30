@@ -1,5 +1,6 @@
 
-
+        
+const ctx = document.getElementById('pie-chart');
 const myForm = document.querySelector('#my-form');
 const msg = document.querySelector('.msg');
 const incomeInput = document.querySelector('#income');
@@ -29,23 +30,28 @@ function onSubmit(e) {
 
         //since most bills are paid on a monthly basis it make the most sense to just convert everything to monthly
         //although I may want to add on the page that this assumes tax has already been accounted for
-        let income = 0;
-        if (payFrequency.value === 'monthly') {
-            income = incomeInput.value;
-        } else if (payFrequency.value === 'biweekly') {
-            income = incomeInput.value * 2;
-        } else if (payFrequency.value === 'weekly') {
-            income = incomeInput.value * 4;
-        } else {
-            income = incomeInput.value * 160;
-        }
+        let income = determineIncome(incomeInput.value, payFrequency);
+        
 
         let [needsMoney, savings, wantsMoney] = splitIncome(income);
-        
-        addToList(`Your monthly income is ${income} \n`);
+
+        userList.innerHTML = '';
+        addToList(`Your monthly income is $${income} \n`);
         addToList(`You should be spending around $${needsMoney} on necessities`);
         addToList(`$${savings} should go to savings or debts`);
         addToList(`That leaves you with $${wantsMoney} for anything you may want.`);
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+            labels: ['Needs', 'Wants', 'Savings/Debts'],
+            datasets: [{
+                label: '$',
+                data: [needsMoney, wantsMoney, savings],
+                borderWidth: 1
+            }]
+            }
+        });
     }
 }
 
@@ -55,6 +61,18 @@ function splitIncome(income) {
     let wantsMoney = income - needsMoney - savings;
 
     return [needsMoney, savings, wantsMoney];
+}
+
+function determineIncome(income, frequency) {
+    if (payFrequency.value === 'monthly') {
+            return incomeInput.value;
+        } else if (payFrequency.value === 'biweekly') {
+            return incomeInput.value * 2;
+        } else if (payFrequency.value === 'weekly') {
+            return incomeInput.value * 4;
+        } else {
+            return incomeInput.value * 160;
+        }
 }
 
 function addToList(string) {
