@@ -5,7 +5,7 @@ const myForm = document.querySelector('#my-form');
 const msg = document.querySelector('.msg');
 const incomeInput = document.querySelector('#income');
 const payFrequency = document.querySelector('#payFreqency');
-const userList = document.querySelector('#users');
+const userList = document.querySelector('#income-info');
 let incomeChart = null; 
 
 
@@ -38,7 +38,7 @@ function onSubmit(e) {
 
         userList.innerHTML = '';
         addToList(`Your monthly income is $${income} \n`);
-        addToList(`You should be spending around $${needsMoney} on necessities`);
+        addToList(`$${needsMoney} should be spent on necessities`);
         addToList(`$${savings} should go to savings or debts`);
         addToList(`That leaves you with $${wantsMoney} for anything you may want.`);
 

@@ -4,3 +4,32 @@
   padding: 5px;
   margin: 5px;
 }
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  border: solid blue;
+  font-size: 18;
+  width: 80%;
+  margin: auto;
+  margin-top: 5%;
+  text-indent: 2em;
+}
+
+.side-by-side {
+  width: 100%;
+  border: solid black;
+  gap: 10%;
+}
+
+#chart {
+  border: solid red;
+  width: 400px;
+  height: 400px;
+}
+
+#income-info {
+  border: solid yellow;
+}

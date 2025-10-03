@@ -8,11 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 </head>
 <body>
-    <h1>Finance calculator</h1>
     <div class="container">
+        <h1>Finance calculator</h1>
         <p>Hello there! Are you trying to figure out how much money you should be spending a month? well you have come to just the right place.</p>
         <p>
-            &emsp; Many places only specify how much of your income should be spent on rent which is normally around 30% of what you make monthly.
+            Many places only specify how much of your income should be spent on rent which is normally around 30% of what you make monthly.
             According to some source you should be spending 50% of your monthly income on your needs which would be things like rent, groceries, 
             car payments, childcare, etc. So now that you have all of your needs met that means the rest of what you have can be used for whatever,
             right? Well not quite 20% of your income should be used on debts or set aside for an emergency fund and your retirement(401k or other 
@@ -38,11 +38,17 @@
             </div>
             <input class="btn" type="submit" value="Submit">
         </form>
-        <ul id="users"></ul>
+        <div class="container side-by-side">
+            <div class="">
+                <ul id="income-info"></ul>
+            </div>
+            
+            <div class="container" id="chart">
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
     </section>
-    <div class="container">
-        <canvas id="pie-chart"></canvas>
-    </div>
+    
     <script src="finance-calculations.js"></script>
 </head>
 </body>
